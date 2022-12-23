@@ -35,7 +35,7 @@
         <field name="inherit_id" ref="product.product_normal_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='group_lots_and_weight']" position="after">
-                <group name="dimensions" string="Dimensions">
+                <group name="dimensions" string="Dimensions" attrs="{'invisible': [('product_variant_count', '=', 1)]}">
                     <label for="dimensions_length" />
                     <div class="o_row">
                         <field name="dimensions_length" />
