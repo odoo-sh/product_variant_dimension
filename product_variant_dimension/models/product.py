@@ -11,7 +11,7 @@ class ProductTemplate(models.Model):
     dimensions_length = fields.Float('Length', compute='_compute_dimensions_length', inverse='_set_dimensions_length', store=True)
     dimensions_width = fields.Float('Width', compute='_compute_dimensions_width', inverse='_set_dimensions_width', store=True)
     dimensions_height = fields.Float('Height', compute='_compute_dimensions_height', inverse='_set_dimensions_height', store=True)
-    dimensions_uom_id = fields.Many2one('uom.uom', 'Dimensions UOM', compute='_compute_dimensions_uom_id', inverse='_set_dimensions_uom_id', store=True)
+    dimensions_uom_id = fields.Many2one('uom.uom', 'Dimensions UOM')
 
     @api.depends('product_variant_ids', 'product_variant_ids.dimensions_length')
     def _compute_dimensions_length(self):
@@ -51,19 +51,6 @@ class ProductTemplate(models.Model):
         for template in self:
             if len(template.product_variant_ids) == 1:
                 template.product_variant_ids.dimensions_height = template.dimensions_height
-
-    @api.depends('product_variant_ids', 'product_variant_ids.dimensions_uom_id')
-    def _compute_dimensions_uom_id(self):
-        unique_variants = self.filtered(lambda template: len(template.product_variant_ids) == 1)
-        for template in unique_variants:
-            template.dimensions_uom_id = template.product_variant_ids.dimensions_uom_id.id
-        for template in (self - unique_variants):
-            template.dimensions_uom_id = None
-
-    def _set_dimensions_uom_id(self):
-        for template in self:
-            if len(template.product_variant_ids) == 1:
-                template.product_variant_ids.dimensions_uom_id = template.dimensions_uom_id.id
 
     @api.model
     def create(self, values):
