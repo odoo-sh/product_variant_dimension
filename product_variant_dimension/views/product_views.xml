@@ -8,17 +8,17 @@
         <field name="inherit_id" ref="product.product_template_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='group_lots_and_weight']" position="after">
-                <group name="dimensions" string="Dimensions">
-                    <label for="dimensions_length" />
-                    <div class="o_row">
+                <group name="dimensions" string="Dimensions" >
+                    <label for="dimensions_length" attrs="{'invisible': [('product_variant_count', '>', 1)]}"/>
+                    <div class="o_row" attrs="{'invisible': [('product_variant_count', '>', 1)]}">
                         <field name="dimensions_length" />
                     </div>
-                    <label for="dimensions_width" />
-                    <div class="o_row">
+                    <label for="dimensions_width" attrs="{'invisible': [('product_variant_count', '>', 1)]}"/>
+                    <div class="o_row" attrs="{'invisible': [('product_variant_count', '>', 1)]}">
                         <field name="dimensions_width" />
                     </div>
-                    <label for="dimensions_height" />
-                    <div class="o_row">
+                    <label for="dimensions_height" attrs="{'invisible': [('product_variant_count', '>', 1)]}"/>
+                    <div class="o_row" attrs="{'invisible': [('product_variant_count', '>', 1)]}">
                         <field name="dimensions_height" />
                     </div>
                     <label for="dimensions_uom_id" />
