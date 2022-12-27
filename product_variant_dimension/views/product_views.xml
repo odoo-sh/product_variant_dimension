@@ -2,10 +2,38 @@
 <!-- Copyright 2022 Sodexis License OPL-1 (See LICENSE file for full copyright and licensing details). -->
 
 <odoo>
-    <record id="product_template_form_view" model="ir.ui.view">
+    <record id="product_normal_form_view" model="ir.ui.view">
+        <field name="name">product.product.form.view</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_lots_and_weight']" position="after">
+                <group name="dimensions" string="Dimensions" >
+                    <label for="dimensions_length" />
+                    <div class="o_row" >
+                        <field name="dimensions_length" />
+                    </div>
+                    <label for="dimensions_width"/>
+                    <div class="o_row" >
+                        <field name="dimensions_width" />
+                    </div>
+                    <label for="dimensions_height" />
+                    <div class="o_row" >
+                        <field name="dimensions_height" />
+                    </div>
+                    <label for="dimensions_uom_id"/>
+                    <div class="o_row">
+                        <field name="dimensions_uom_id" />
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_only_form_view" model="ir.ui.view">
         <field name="name">product.template.dimensions.form.view</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//group[@name='group_lots_and_weight']" position="after">
                 <group name="dimensions" string="Dimensions" >
