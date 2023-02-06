@@ -18,7 +18,4 @@
     "data": [
         "views/product_views.xml",
     ],
-    "cloc_exclude": [
-        "**/*", # can be used to ignore an entire module.
-    ],
 }
